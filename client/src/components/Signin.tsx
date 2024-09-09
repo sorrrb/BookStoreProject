@@ -27,6 +27,12 @@ function Signin() {
     setHasErrorMessage("");
     setIsLoading(true);
 
+    if (!username || !password) {
+      setIsLoading(false);
+      setHasErrorMessage("Please fill out both the username and password fields!");
+      return;
+    }
+
     try {
       const { data } = await axios.post<ILoginResponse>(
         "/api/signin",

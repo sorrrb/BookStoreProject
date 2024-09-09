@@ -18,7 +18,15 @@ function Router() {
         }
       />
 
-      <Route path="/" element={<Signin />} />
+      {["/", "/signin", "/login"].map((path, index) => {
+        return (
+          <Route 
+            path={path}
+            element={<Signin />}
+            key={index}
+          />
+        )
+      })}
 
       <Route path="/book/details" element={
         <ProtectedRoute>
