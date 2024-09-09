@@ -215,3 +215,11 @@
 .user-field {
   margin-bottom: 1rem;
 }
+
+.signin-warning {
+  background-color: #ffffff50;
+  padding: 1rem;
+  border-radius: 4px;
+  color: #912e2e;
+  font-weight: 700;
+}

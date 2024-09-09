@@ -1,10 +1,17 @@
 import { FormEvent, useContext, useState } from "react"
 import { SecurityTokenContext } from "../contexts/SecurityTokenContext"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+interface ILoginResponse {
+  message: string;
+  token?: string;
+  expiry?: number;
+}
 
 function Signin() {
   /* Auth (Context/Router) */
-  const {signin} = useContext(SecurityTokenContext);
+  const { signin } = useContext(SecurityTokenContext);
   const navigate = useNavigate();
 
   /* Input (State) */
@@ -13,16 +20,30 @@ function Signin() {
 
   /* AJAX validation */
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState("");
+  const [hasErrorMessage, setHasErrorMessage] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setHasErrorMessage("");
     setIsLoading(true);
 
     try {
-      console.log("API HERE");
+      const { data } = await axios.post<ILoginResponse>(
+        "/api/signin",
+        {
+          username,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(data);
     } catch (error) {
       console.error(error);
+      if (axios.isAxiosError(error) && error.response?.status === 401) setHasErrorMessage("Invalid username or password");
       setIsLoading(false);
     }
   }
@@ -44,6 +65,12 @@ function Signin() {
         </div>
         <button type="submit" disabled={isLoading}>Login</button>
       </form>
+      {isLoading && <p>Loading... </p>}
+      {hasErrorMessage && (
+        <div className="signin-warning">
+          {hasErrorMessage}
+        </div>
+      )}
     </div>
   )
 }
