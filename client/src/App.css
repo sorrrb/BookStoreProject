@@ -107,6 +107,21 @@
       }
     }
   }
+
+  .ajax-warning {
+    display: grid;
+    place-items: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .ajax-alert {
+    margin-top: 2rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    text-align: center;
+  }
 }
 
 
