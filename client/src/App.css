@@ -147,12 +147,6 @@
       }
     }
 
-    .book-thumbnail {
-      height: 400px;
-      width: 400px;
-      background-color: gray;
-    }
-
     .book-information {
       display: flex;
       flex-direction: column;
@@ -160,7 +154,7 @@
     }
 
     .book-description {
-      max-width: 450px;
+      max-width: 900px;
     }
 
     .book-authors,

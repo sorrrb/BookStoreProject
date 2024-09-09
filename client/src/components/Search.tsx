@@ -1,7 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { error } from "console";
+import { Link } from "react-router-dom";
 
 interface IAPIResponse {
   books: Array<object>;
@@ -15,6 +15,11 @@ function Search() {
 
   const handleSearch = async (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
+    
+    if (!setSearchInput) {
+      (setSearchResults([]));
+    }
+
     try {
       const searchInputFormatted = searchInput.replace(/ /g, "+");
       const { data } = await axios.get<IAPIResponse>(
@@ -27,7 +32,7 @@ function Search() {
       if (axios.isAxiosError(e) && e.response?.status === 404) {
         setHasError("404 -- Search results not found");
       } else setHasError("We're sorry - an unexpected error occured.");
-      setSearchResults(([]));
+      setSearchResults([]);
     }
   }
 
@@ -44,9 +49,13 @@ function Search() {
             const authorArray = book.authors;
             return (
               <div className="book-result" key={index}>
-                <img className="book-cover" src={book.imageLinks ? book.imageLinks.thumbnail : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"} />
+                <Link to={`../book/${book.id}`}>
+                  <img className="book-cover" src={book.imageLinks ? book.imageLinks.thumbnail : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"} />
+                </Link>
                 <div className="book-text">
-                  <h1>{book.title}</h1>
+                  <Link to={`../book/${book.id}`}>
+                    <h1>{book.title}</h1>
+                  </Link>
                   <h2>{authorArray && authorArray.map((author: string, index: number) => {
                     return (index >= 3 ?
                       "" :
