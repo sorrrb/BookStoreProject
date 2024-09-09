@@ -25,6 +25,6 @@ services:
       - key: NODE_VERSION
         # Update the line below to your current version of node
         # To get your node version: node -v
-        value: 20.11hi
+        value: 20.11
       - key: NODE_ENV
         value: "production"
