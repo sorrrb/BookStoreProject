@@ -1,12 +1,12 @@
 import './App.css'
+import Search from './components/Search'
+import BookDetails from './components/BookDetails'
+import Bookshelf from './components/Bookshelf'
 
 function App() {
 
   return (
     <>
-      <div className="content">
-
-      </div>
     </>
   )
 }

@@ -1,42 +1,149 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  height: 100svh;
+}
+
+.navbar {
+  background-color: #245b60;
+  display: flex;
+  justify-content: space-between;
   padding: 2rem;
-  text-align: center;
-}
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+  button {
+    background: none;
+    border: 1px solid transparent;
+    color: white;
+    cursor: pointer;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  button:hover {
+    background-color: #4b868b;
+    border: 1px solid #00000050;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+
+
+/* Search component page */
+.search {
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    padding: 2rem;
+
+    .book-search {
+      width: 100%;
+      display: flex;
+
+      button {
+        border: 1px solid #80808080;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        cursor: pointer;
+        padding: 0.5rem 1.5rem;
+        font-size: 1.5rem;
+      }
+
+      input {
+        flex: 1;
+        border: 1px solid #80808080;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        padding-inline: 0.75rem;
+      }
+
+      input:focus,
+      button:focus {
+        outline: none;
+      }
+
+      button:hover {
+        background-color: #00000030;
+      }
+    }
   }
 }
 
-.card {
-  padding: 2em;
+
+
+/* BookDetails component page */
+.book-details {
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 2.5rem 1.5rem;
+
+    .book-container {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.125rem;
+      gap: 3rem;
+
+      .book-resources {
+        display: flex;
+        gap: 2rem;
+      }
+    }
+
+    .book-thumbnail {
+      height: 400px;
+      width: 400px;
+      background-color: gray;
+    }
+
+    .book-information {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .book-description {
+      max-width: 450px;
+    }
+
+    .book-authors,
+    .book-publisher,
+    .book-publication-date {
+
+      p:first-child,
+      span {
+        font-weight: 700;
+      }
+    }
+  }
 }
 
-.read-the-docs {
-  color: #888;
+
+
+/* Bookshelf component page */
+.bookshelf {
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .bookshelf-container {
+    padding: 1rem;
+    border: 1px solid #00000020;
+    border-radius: 4px;
+
+    h1 {
+      font-size: 1.75rem;
+    }
+  }
 }
