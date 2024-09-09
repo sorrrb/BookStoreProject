@@ -40,7 +40,13 @@ function Signin() {
           },
         }
       );
-      console.log(data);
+
+      if (!data?.token) {
+        throw new Error("Missing access token in login response.");
+      }
+
+      signin(data.token);
+      navigate("/bookshelf", { replace: true });
     } catch (error) {
       console.error(error);
       if (axios.isAxiosError(error) && error.response?.status === 401) setHasErrorMessage("Invalid username or password");
