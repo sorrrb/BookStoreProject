@@ -1,14 +1,17 @@
 import './App.css'
+import { BrowserRouter } from 'react-router-dom'
 import Search from './components/Search'
 import BookDetails from './components/BookDetails'
 import Bookshelf from './components/Bookshelf'
 import Signin from './components/Signin'
+import Router from './components/Router'
 
 function App() {
 
   return (
-    <>
-    </>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   )
 }
 
