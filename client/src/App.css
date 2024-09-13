@@ -1,277 +1,371 @@
+:root {
+  --main: #cfe8ef;
+  --main-opaque: #cfe8ef75;
+  --main-clear: #cfe8ef25;
+  --main-inverse: #303111;
+  --main-contrast: #50cdd3;
+  --btn-hover: #cfcfcf50;
+}
+
 #root {
   height: 100svh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
 }
 
+a, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* Navbar component */
 .navbar {
-  background-color: #245b60;
+  background-color: var(--main);
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
+  align-items: center;
+  padding: 1rem 5rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-  button {
-    background: none;
-    border: 1px solid transparent;
-    color: white;
-    cursor: pointer;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    padding: 1rem;
-  }
+  .bookshelf-nav,
+  .search-nav {
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #00000025;
+    border-radius: 4px;
+    font-size: 1.125rem;
 
-  button:hover {
-    background-color: #4b868b;
-    border: 1px solid #00000050;
-  }
-}
-
-
-
-/* Search component page */
-.search {
-  display: flex;
-  flex-direction: column;
-
-  .content {
-    padding: 2rem;
-
-    .book-search {
-      width: 100%;
-      display: flex;
-
-      button {
-        border: 1px solid #80808080;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        cursor: pointer;
-        padding: 0.5rem 1.5rem;
-        font-size: 1.5rem;
-      }
-
-      input {
-        flex: 1;
-        border: 1px solid #80808080;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        font-family: "Roboto", sans-serif;
-        font-size: 1rem;
-        font-weight: 500;
-        padding-inline: 0.75rem;
-      }
-
-      input:focus,
-      button:focus {
-        outline: none;
-      }
-
-      button:hover {
-        background-color: #00000030;
-      }
-    }
-
-    .books-container {
-      display: flex;
-      flex-direction: column;
-      padding: 2rem 1rem;
-      gap: 2rem;
-    }
-
-    .book-result {
+    a {
       display: flex;
       align-items: center;
-      gap: 1rem;
-    }
-
-    .book-cover {
-      max-width: 150px;
-      display: grid;
-      place-items: center;
-      border: 1px solid #00000050;
-      padding: 0.125rem;
-    }
-
-    .book-text {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-family: "Roboto", sans-serif;
-
-      h1 {
-        color: #5ab1b9;
-        font-weight: 800;
-      }
-
-      h2 {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: 500;
-      }
     }
   }
 
-  .ajax-warning {
-    display: grid;
-    place-items: center;
-    font-family: "Roboto", sans-serif;
-    font-size: 2rem;
-    text-align: center;
+  .bookshelf-nav a {
+    gap: 0.75rem;
   }
 
-  .ajax-alert {
-    margin-top: 2rem;
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-    text-align: center;
+  .search-nav a {
+    gap: 0.375rem;
   }
-}
 
-
-
-/* BookDetails component page */
-.book-details {
-  display: flex;
-  flex-direction: column;
-
-  .content {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    padding: 2.5rem 5rem;
-
-    .book-container {
-      display: flex;
-      flex-direction: column;
-      font-size: 1.125rem;
-      gap: 3rem;
-
-      .book-resources {
-        display: flex;
-        gap: 2rem;
-      }
-    }
-
-    .book-information {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .book-description {
-      max-width: 900px;
-    }
-
-    .book-authors,
-    .book-publisher,
-    .book-publication-date {
-
-      p:first-child,
-      span {
-        font-weight: 700;
-      }
-    }
+  .bookshelf-nav:hover,
+  .search-nav:hover {
+    cursor: pointer;
+    background-color: var(--btn-hover);
   }
-}
 
-
-
-/* Bookshelf component page */
-.bookshelf {
-  display: flex;
-  flex-direction: column;
-
-  .content {
+  .search-signout--container {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 1rem;
-    padding: 1rem;
-    font-family: "Roboto", sans-serif;
-  }
-
-  .bookshelf-container {
-    padding: 1rem;
-    border: 1px solid #00000020;
-    border-radius: 4px;
-
-    h1 {
-      font-size: 1.75rem;
-    }
   }
 }
 
+/* Book display wrapper */
+.book-display {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 2.5rem;
+}
 
-
-/* Signin component page */
-.signin {
+/* Login component (page) */
+.login {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
-  background-color: #245b60;
-  color: white;
-  font-family: "Roboto", sans-serif;
-  
-  h1 {
-    font-size: 2.5rem;
+  background-color: var(--main);
+  gap: 5rem;
+
+  .login-hero {
+    text-align: center;
+
+    h1 {
+      font-size: 5rem;
+      letter-spacing: -4px;
+    }
+    
+    h2 {
+      font-weight: 400;
+    }
   }
 
   form {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 2rem;
 
-    & button {
-      margin-top: 2rem;
-      background: none;
-      background-color: #ffffff50;
-      border: 1px solid white;
+    .user-field,
+    .password-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    button {
+      background: white;
+      border: 1px solid #cacacaca;
       border-radius: 2px;
-      color: white;
-      cursor: pointer;
-      padding: 0.5rem;
       align-self: flex-end;
-      font-family: "Roboto", sans-serif;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: 00;
+    }
+
+    button:hover {
+      cursor: pointer;
+      background-color: var(--btn-hover);
+    }
+
+    label {
+      font-size: 1rem;
       font-weight: 700;
     }
 
-    & button:hover {
+    input {
       background-color: white;
-      color: #245b60;
+      border: 1px solid var(--main-inverse);
+      border-radius: 2px;
+      font-size: 1rem;
+      padding: 0.5rem;
+      max-width: initial;
+    }
+
+    .warning,
+    .loader {
+      text-align: center;
+      align-self: center;
+    }
+
+    .loader {
+      max-width: 50%;
+      color: var(--main-inverse);
+      font-weight: 600;
+    }
+
+    .warning {
+      max-width: 75%;
+      color: crimson;
+      font-weight: 600;
+    }
+
+    .login-error {
+      label {
+        color: crimson;
+      }
+
+      input {
+        border: none;
+        background-color: lightpink;
+        outline: 1px solid salmon;
+      }
     }
   }
 }
 
-.user-field,
-.password-field {
-  display: flex;
-  flex-direction: column;
-  color: white;
+/* Search component (page) */
+.book-search {
 
-  label {
-    margin-bottom: 0.25rem;
-    font-weight: 600;
+  .book-card--container {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 1rem;
+    background-color: var(--main-clear);
+    border: 1px solid var(--main-opaque);
+
+    .book-card--thumbnail {
+      display: grid;
+      place-items: center;
+    }
+  }
+  
+  .search-input--container {
+    display: flex;
+
+    button,
+    input {
+      border: 1px solid var(--btn-hover);
+      padding: 0.25rem;
+      border-radius: 6px;
+    }
+
+    button {
+      background: var(--main);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      padding: 1rem 2rem;
+    }
+
+    button:hover {
+      cursor: pointer;
+      background-color: var(--btn-hover);
+    }
+
+    input {
+      flex: 1;
+      background-color: var(--main-clear);
+      border-left: none;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      font-size: 1.5rem;
+      padding-inline: 1rem;
+    }
+
+    button:focus,
+    input:focus {
+      outline: none;
+    }
+
+    input:focus {
+      background-color: white;
+      border: 1px solid var(--main);
+    }
   }
 
-  input {
-    background: none;
-    border: 1px solid #ffffff80;
-    border-radius: 4px;
-    color: white;
-    padding: 0.75rem 0.5rem;
-    font-size: 1rem;
-  }
+  .search-output--container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2.5rem;
 
-  input:focus {
-    outline: 1px solid #80808080;
+    .book-card--container {
+
+      .book-card--thumbnail img {
+        max-width: 128px;
+      }
+       
+      .book-card--info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .book-card--title {
+          color: var(--main-contrast);
+        }
+      }
+    }
   }
 }
 
-.user-field {
-  margin-bottom: 1rem;
+/* Book details component (page) */
+.book-details {
+
+  .book-card--container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    span,
+    label {
+      font-weight: 700;
+    }
+  }
+
+  .book-card--header {
+    font-size: 3rem;
+  }
+
+  .book-card--content {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .book-card--thumbnail {
+    img {
+      max-width: 200px;
+    }
+  }
+
+  .book-card--description {
+    max-width: 1000px;
+  }
+
+  .book-card--info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .book-card--shelf-select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    select {
+      align-self: flex-start;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      width: 200px;
+    }
+  }
 }
 
-.signin-warning {
-  background-color: #ffffff50;
-  padding: 1rem;
-  border-radius: 4px;
-  color: #8f4646;
-  font-weight: 700;
+/* Bookshelf component (page) */
+.bookshelf {
+
+  .bookshelf--container {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 5rem;
+  }
+
+  .bookshelf-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #cfe8ef50;
+    gap: 1rem;
+    padding: 2.5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    & h1 {
+      letter-spacing: -1px;
+    }
+  }
+
+  .book-card--container {
+    display: flex;
+    gap: 2.5rem;
+
+    img {
+      max-width: 200px;
+      border: 1px solid #80808050;
+      padding: 0.25rem;
+    }
+  }
+
+  .bookshelf-card--info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .bookshelf-card--title {
+    color: cornflowerblue;
+    font-weight: 500;
+  }
+
+  .bookshelf-card--shelf-select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+    select {
+      border: 1px solid cornflowerblue;
+      border-radius: 4px;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      width: 200px;
+    }
+
+    label {
+      font-weight: 700;
+    }
+  }
 }
