@@ -37,6 +37,7 @@ password: granger
 ## Contributions
 
 - [Icons8](https://icons8.com/) - for the icon CDN used to deliver the project icon files
+- [Undraw](https://undraw.co/illustrations) - for the login SVG
 
 ### To-Do
 
