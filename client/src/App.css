@@ -62,6 +62,13 @@ a, a:visited {
     align-items: center;
     gap: 1rem;
   }
+
+  .signout-nav {
+
+    img:hover {
+      transform: scale(1.05);
+    }
+  }
 }
 
 /* Book display wrapper */
