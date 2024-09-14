@@ -76,11 +76,16 @@ a, a:visited {
 .login {
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--main);
   gap: 5rem;
+
+  .login-interface {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
 
   .login-hero {
     text-align: center;
