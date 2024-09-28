@@ -1,7 +1,10 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
+import { AccessTokenContext } from "../../contexts/AccessTokenContext";
+import axios from "axios";
 
 type BookDetailsCardProps = {
   title: string;
+  bookID: string;
   thumbnailSrc: string;
   authors: string[];
   description: string;
@@ -13,6 +16,7 @@ type BookDetailsCardProps = {
 
 function BookDetailsCard({
   title,
+  bookID,
   thumbnailSrc,
   authors,
   description,
@@ -21,6 +25,54 @@ function BookDetailsCard({
   shelfStatus,
   changeShelf,
 }: BookDetailsCardProps) {
+  const { getToken } = useContext(AccessTokenContext);
+
+  const formatShelfKey = (shelfStr: string) => {
+    let output: string = "";
+    switch (shelfStr) {
+      case "Want to Read":
+        output = "wantToRead";
+        break;
+      case "Currently Reading":
+        output = "currentlyReading";
+        break;
+      case "Read":
+        output = "read";
+        break;
+    }
+    return output;
+  };
+
+  const moveBook = (e: ChangeEvent<HTMLSelectElement>) => {
+    changeShelf(e);
+    async function reloadShelf() {
+      try {
+        const { data } = await axios.put(
+          `/api/bookshelf/${bookID}/${formatShelfKey(e.target.value)}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${getToken()}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (!ignore) {
+          /* Handle AJAX response (if necessary?) */
+          return;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    let ignore = false;
+    reloadShelf();
+    return () => {
+      ignore = true;
+    };
+  };
+
   return (
     <div className="book-card--container">
       <div className="book-card--header">{title}</div>
@@ -46,7 +98,10 @@ function BookDetailsCard({
           </div>
           <div className="book-card--shelf-select">
             <label>Change Shelf:</label>
-            <select value={shelfStatus} onChange={changeShelf}>
+            <select value={shelfStatus ? shelfStatus : ""} onChange={moveBook}>
+              <option value="" disabled>
+                ----------
+              </option>
               <option value="Want to Read">Want to Read</option>
               <option value="Currently Reading">Currently Reading</option>
               <option value="Read">Read</option>
