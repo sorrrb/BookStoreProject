@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent, MouseEvent, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AccessTokenContext } from "../../contexts/AccessTokenContext";
 
@@ -8,12 +8,20 @@ type BookshelfCardProps = {
   thumbnailSrc: string;
   shelfStatus: string;
   bookID: string;
-}
+  updateShelf: (obj: object) => void;
+};
 
-function BookshelfCard({title, thumbnailSrc, shelfStatus, bookID }: BookshelfCardProps) {
+function BookshelfCard({
+  title,
+  thumbnailSrc,
+  shelfStatus,
+  bookID,
+  updateShelf,
+}: BookshelfCardProps) {
   const { getToken } = useContext(AccessTokenContext);
+  const [shelf, setShelf] = useState(shelfStatus);
 
-    const formatShelfKey = (shelfStr: string) => {
+  const formatShelfKey = (shelfStr: string) => {
     let output: string = "";
     switch (shelfStr) {
       case "Want to Read":
@@ -23,22 +31,29 @@ function BookshelfCard({title, thumbnailSrc, shelfStatus, bookID }: BookshelfCar
         output = "currentlyReading";
         break;
       case "Read":
-        output = "Read";
+        output = "read";
         break;
     }
     return output;
-  }
+  };
 
   const moveBook = (e: ChangeEvent<HTMLSelectElement>) => {
+    setShelf(e.target.value);
     async function changeShelf() {
       try {
-        const { data } = await axios.post(`/api/bookshelf/${bookID}/${formatShelfKey(e.target.value)}`, {
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
-        });
+        const { data } = await axios.put(
+          `/api/bookshelf/${bookID}/${formatShelfKey(e.target.value)}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${getToken()}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         if (!ignore) {
           /* Handle AJAX response */
+          updateShelf(data.books);
         }
       } catch (e) {
         console.error(e);
@@ -49,42 +64,57 @@ function BookshelfCard({title, thumbnailSrc, shelfStatus, bookID }: BookshelfCar
     changeShelf();
     return () => {
       ignore = true;
+    };
+  };
+
+  const removeBook = (e: MouseEvent<HTMLButtonElement>) => {
+    async function handleShelf() {
+      try {
+        const { data } = await axios.delete(`/api/bookshelf/${bookID}`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+            "Content-Type": "application/json",
+          },
+        });
+        if (!ignore) {
+          /* Handle AJAX response */
+          updateShelf(data.books);
+        }
+      } catch (e) {
+        console.error(e);
+      }
     }
-  }
+
+    let ignore = false;
+    handleShelf();
+    return () => {
+      ignore = true;
+    };
+  };
 
   return (
     <div className="book-card--container">
-      <Link
-        to={`../book/${bookID}`}
-        relative={"path"}
-        >
-          <div className="bookshelf-card--thumbnail">
-            <img src={thumbnailSrc}  />
-          </div>
+      <Link to={`../book/${bookID}`} relative={"path"}>
+        <div className="bookshelf-card--thumbnail">
+          <img src={thumbnailSrc} />
+        </div>
       </Link>
       <div className="bookshelf-card--info">
-        <Link
-          to={`../book/${bookID}`}
-          relative={"path"}
-          >
-            <h1 className="bookshelf-card--title">
-              {title}
-            </h1>
-          </Link>
+        <Link to={`../book/${bookID}`} relative={"path"}>
+          <h1 className="bookshelf-card--title">{title}</h1>
+        </Link>
         <div className="bookshelf-card--shelf-select">
-              <label>Change Shelf:</label>
-              <select
-                value={shelfStatus}
-                onChange={moveBook}
-                >
-                <option value="Want to Read">Want to Read</option>
-                <option value="Currently Reading">Currently Reading</option>
-                <option value="Read">Read</option>
-              </select>
+          <label>Change Shelf:</label>
+          <select value={shelf} onChange={moveBook}>
+            <option value="Want to Read">Want to Read</option>
+            <option value="Currently Reading">Currently Reading</option>
+            <option value="Read">Read</option>
+          </select>
+          <button onClick={removeBook}>Remove</button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default BookshelfCard
+export default BookshelfCard;

@@ -48,8 +48,10 @@ function Bookshelf() {
     loadBookshelf();
     return () => {
       ignore = true;
-    }
-  }, [getToken]);
+    };
+  }, [bookshelf]);
+
+  const updateShelf = (obj: object) => setBookshelf(obj);
 
   return (
     <div className="bookshelf">
@@ -58,61 +60,82 @@ function Bookshelf() {
         <div className="bookshelf--container">
           <div className="bookshelf-wrapper">
             <h1>Want to Read</h1>
-            {bookshelf && (shelfWant.length >= 1 ?
-              shelfWant.map((book: any, index: number) => {
-                return (
-                  <BookshelfCard
-                    key={index}
-                    title={book.title}
-                    thumbnailSrc={(book.imageLinks ?
-                      book.imageLinks.thumbnail :
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png")}
-                    shelfStatus={"Want to Read"}
-                    bookID={book.id} />
-                )
-              }) : <p>No books in the shelf!</p>
-            )}
+            {bookshelf &&
+              (shelfWant.length >= 1 ? (
+                shelfWant.map((book: any, index: number) => {
+                  return (
+                    <BookshelfCard
+                      key={index}
+                      title={book.title}
+                      thumbnailSrc={
+                        book.imageLinks
+                          ? book.imageLinks.thumbnail
+                          : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"
+                      }
+                      shelfStatus={"Want to Read"}
+                      bookID={book.id}
+                      updateShelf={updateShelf}
+                    />
+                  );
+                })
+              ) : (
+                <p>No books in the shelf!</p>
+              ))}
           </div>
 
           <div className="bookshelf-wrapper">
             <h1>Currently Reading</h1>
-            {bookshelf && ((shelfCurrent.length >= 1) ?
-              shelfCurrent.map((book: any, index: number) => {
-                return (
-                  <BookshelfCard
-                    key={index}
-                    title={book.title}
-                    thumbnailSrc={(book.imageLinks ?
-                      book.imageLinks.thumbnail :
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png")}
-                    shelfStatus={"Currently Reading"}
-                    bookID={book.id} />
-                )
-              }) : <p>No books in the shelf!</p>
-            )}
+            {bookshelf &&
+              (shelfCurrent.length >= 1 ? (
+                shelfCurrent.map((book: any, index: number) => {
+                  return (
+                    <BookshelfCard
+                      key={index}
+                      title={book.title}
+                      thumbnailSrc={
+                        book.imageLinks
+                          ? book.imageLinks.thumbnail
+                          : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"
+                      }
+                      shelfStatus={"Currently Reading"}
+                      bookID={book.id}
+                      updateShelf={updateShelf}
+                    />
+                  );
+                })
+              ) : (
+                <p>No books in the shelf!</p>
+              ))}
           </div>
 
           <div className="bookshelf-wrapper">
             <h1>Read</h1>
-            {bookshelf && (shelfRead.length >= 1 ?
-              shelfRead.map((book: any, index: number) => {
-                return (
-                  <BookshelfCard
-                    key={index}
-                    title={book.title}
-                    thumbnailSrc={(book.imageLinks ?
-                      book.imageLinks.thumbnail :
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png")}
-                    shelfStatus={"Read"}
-                    bookID={book.id} />
-                )
-              }) : <p>No books in the shelf!</p>
-            )}
+            {bookshelf &&
+              (shelfRead.length >= 1 ? (
+                shelfRead.map((book: any, index: number) => {
+                  return (
+                    <BookshelfCard
+                      key={index}
+                      title={book.title}
+                      thumbnailSrc={
+                        book.imageLinks
+                          ? book.imageLinks.thumbnail
+                          : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"
+                      }
+                      shelfStatus={"Read"}
+                      bookID={book.id}
+                      updateShelf={updateShelf}
+                    />
+                  );
+                })
+              ) : (
+                <p>No books in the shelf!</p>
+              ))}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Bookshelf
+export default Bookshelf;

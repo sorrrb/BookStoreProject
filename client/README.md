@@ -47,4 +47,6 @@ password: granger
 - [x] Implement basic login form validation
 - [x] Implement login authentication
 - [x] Implement bookshelf AJAX request & display functionality
-- [ ] Implement movement of books between shelves
+- [x] Implement logic for movement of books between shelves
+- [x] Implement logic allowing user to remove book from bookshelf
+- [] Implement logic allowing user to add book to a shelf

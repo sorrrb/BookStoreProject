@@ -14,11 +14,11 @@
   font-family: "Roboto", sans-serif;
 }
 
-a, a:visited {
+a,
+a:visited {
   text-decoration: none;
   color: inherit;
 }
-
 
 /* Navbar component */
 .navbar {
@@ -64,7 +64,6 @@ a, a:visited {
   }
 
   .signout-nav {
-
     img:hover {
       transform: scale(1.05);
     }
@@ -101,7 +100,7 @@ a, a:visited {
       font-size: 5rem;
       letter-spacing: -4px;
     }
-    
+
     h2 {
       font-weight: 400;
     }
@@ -182,7 +181,6 @@ a, a:visited {
 
 /* Search component (page) */
 .book-search {
-
   .book-card--container {
     display: flex;
     align-items: center;
@@ -196,7 +194,7 @@ a, a:visited {
       place-items: center;
     }
   }
-  
+
   .search-input--container {
     display: flex;
 
@@ -246,11 +244,10 @@ a, a:visited {
     gap: 2.5rem;
 
     .book-card--container {
-
       .book-card--thumbnail img {
         max-width: 128px;
       }
-       
+
       .book-card--info {
         display: flex;
         flex-direction: column;
@@ -266,7 +263,6 @@ a, a:visited {
 
 /* Book details component (page) */
 .book-details {
-
   .book-card--container {
     display: flex;
     flex-direction: column;
@@ -321,7 +317,6 @@ a, a:visited {
 
 /* Bookshelf component (page) */
 .bookshelf {
-
   .bookshelf--container {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
@@ -367,7 +362,7 @@ a, a:visited {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    
+
     select {
       border: 1px solid cornflowerblue;
       border-radius: 4px;
@@ -378,6 +373,22 @@ a, a:visited {
 
     label {
       font-weight: 700;
+    }
+
+    button {
+      align-self: flex-start;
+      border: 1px solid salmon;
+      border-radius: 4px;
+      color: salmon;
+      cursor: pointer;
+      margin-top: 1rem;
+      padding: 0.25rem 0.5rem;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background-color: salmon;
+      color: white;
     }
   }
 }
