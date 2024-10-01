@@ -10,6 +10,14 @@ type BookDetailsCardProps = {
   description: string;
   publisher: string;
   publicationDate: string;
+  pages: number;
+  dimensions: {
+    height: string;
+    thickness: string;
+    width: string;
+  };
+  infoSrc: string;
+  previewSrc: string;
   shelfStatus: string;
   changeShelf: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
@@ -22,6 +30,10 @@ function BookDetailsCard({
   description,
   publisher,
   publicationDate,
+  pages,
+  dimensions,
+  infoSrc,
+  previewSrc,
   shelfStatus,
   changeShelf,
 }: BookDetailsCardProps) {
@@ -81,11 +93,31 @@ function BookDetailsCard({
           <img src={thumbnailSrc} />
         </div>
         <div className="book-card--info">
-          <div className="book-card--authors">
-            <span>Authors:</span>
-            {authors.map((author: string, index: number) => {
-              return <p key={index}>{author}</p>;
-            })}
+          <div className="book-card--heading">
+            <div className="book-card--authors">
+              <span>Authors:</span>
+              {authors.map((author: string, index: number) => {
+                return <p key={index}>{author}</p>;
+              })}
+            </div>
+            <div className="book-card--links">
+              <a href={infoSrc}>
+                <img
+                  width="25"
+                  height="25"
+                  src="https://img.icons8.com/fluency/25/google-logo.png"
+                  alt="google-logo"
+                />
+              </a>
+              <a href={previewSrc}>
+                <img
+                  width="25"
+                  height="25"
+                  src="https://img.icons8.com/fluency/25/google-play.png"
+                  alt="google-play"
+                />
+              </a>
+            </div>
           </div>
           <div className="book-card--description">{description}</div>
           <div className="book-card--publisher">
@@ -94,10 +126,21 @@ function BookDetailsCard({
           </div>
           <div className="book-card--publish-date">
             <span>Published Date</span>
-            <p>{publicationDate}</p>
+            <p>{new Date(publicationDate).toLocaleDateString()}</p>
+          </div>
+          <div className="book-card--dimensions">
+            <span>Dimensions</span>
+            <p>
+              {dimensions
+                ? `${dimensions.height} x ${dimensions.width} x ${dimensions.thickness}`
+                : "N/A"}
+            </p>
+          </div>
+          <div className="book-card--pages">
+            <span>{pages}</span> pages
           </div>
           <div className="book-card--shelf-select">
-            <label>Change Shelf:</label>
+            <label>{shelfStatus ? "Change Shelf" : "Add to Shelf"}</label>
             <select value={shelfStatus ? shelfStatus : ""} onChange={moveBook}>
               <option value="" disabled>
                 ----------

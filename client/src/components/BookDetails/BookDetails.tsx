@@ -94,6 +94,10 @@ function BookDetails() {
             description={bookDetails.description}
             publisher={bookDetails.publisher}
             publicationDate={bookDetails.publishedDate}
+            pages={bookDetails.pageCount}
+            dimensions={bookDetails.dimensions}
+            infoSrc={bookDetails.infoLink}
+            previewSrc={bookDetails.previewLink}
             shelfStatus={currentShelf}
             changeShelf={changeShelfHandler}
           />
