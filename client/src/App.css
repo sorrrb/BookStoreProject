@@ -299,6 +299,17 @@ a:visited {
     gap: 2rem;
   }
 
+  .book-card--heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+
+  .book-card--links {
+    display: flex;
+    gap: 1rem;
+  }
+
   .book-card--shelf-select {
     display: flex;
     flex-direction: column;
@@ -319,26 +330,40 @@ a:visited {
 .bookshelf {
   .bookshelf--container {
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
     row-gap: 5rem;
   }
 
   .bookshelf-wrapper {
+    min-height: 150px;
     display: flex;
     flex-direction: column;
     background-color: #cfe8ef50;
-    gap: 1rem;
     padding: 2.5rem;
+    gap: 1rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
     & h1 {
       letter-spacing: -1px;
+
+      span {
+        font-weight: 100;
+      }
+    }
+
+    & span.empty {
+      font-style: italic;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
     }
   }
 
   .book-card--container {
     display: flex;
     gap: 2.5rem;
+    padding: 1rem;
+    background-color: var(--main-clear);
+    border: 1px solid var(--main-opaque);
 
     img {
       max-width: 200px;
@@ -355,7 +380,7 @@ a:visited {
 
   .bookshelf-card--title {
     color: cornflowerblue;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .bookshelf-card--shelf-select {
