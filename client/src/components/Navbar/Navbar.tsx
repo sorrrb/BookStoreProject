@@ -8,47 +8,41 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="bookshelf-nav">
-        <Link
-          to={"../bookshelf"}
-          relative={"path"}
-        >
+        <Link to={"../bookshelf"} relative={"path"}>
           <img
             width="40"
             height="40"
             src="https://img.icons8.com/ios-filled/40/tidy-shelf.png"
-            alt="tidy-shelf"/>
+            alt="tidy-shelf"
+          />
           <h1>My Bookshelf</h1>
         </Link>
       </div>
       <div className="search-signout--container">
         <div className="search-nav">
-          <Link
-            to={"../search"}
-            relative={"path"}
-          >
+          <Link to={"../search"} relative={"path"}>
             <img
               width="25"
               height="25"
               src="https://img.icons8.com/ios-filled/25/search.png"
-              alt="search"/>
+              alt="search"
+            />
             <h1>Search</h1>
           </Link>
         </div>
         <div className="signout-nav" onClick={() => logout()}>
-          <Link
-            to={"../"}
-            relative={"path"}
-          >
+          <Link to={"../"} relative={"path"}>
             <img
               width={25}
               height={25}
               src="https://img.icons8.com/windows/25/exit.png"
-              alt="exit"/>
+              alt="exit"
+            />
           </Link>
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

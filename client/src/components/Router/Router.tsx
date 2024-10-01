@@ -1,15 +1,14 @@
-import { Routes, Route } from "react-router-dom"
-import Search from "../Search/Search"
-import Login from "../Login/Login"
-import Bookshelf from "../Bookshelf/Bookshelf"
-import BookDetails from "../BookDetails/BookDetails"
-import ProtectedRoute from "./ProtectedRoute"
+import { Routes, Route } from "react-router-dom";
+import Search from "../Search/Search";
+import Login from "../Login/Login";
+import Bookshelf from "../Bookshelf/Bookshelf";
+import BookDetails from "../BookDetails/BookDetails";
+import ProtectedRoute from "./ProtectedRoute";
 
 function Router() {
   return (
     <Routes>
-
-      <Route 
+      <Route
         path="/search"
         element={
           <ProtectedRoute>
@@ -17,18 +16,12 @@ function Router() {
           </ProtectedRoute>
         }
       />
-      
+
       {["/", "/login"].map((path, index) => {
-        return (
-          <Route
-            key={index}
-            path={path}
-            element={<Login />}
-          />
-        )
+        return <Route key={index} path={path} element={<Login />} />;
       })}
 
-      <Route 
+      <Route
         path="/book/*"
         element={
           <ProtectedRoute>
@@ -45,9 +38,8 @@ function Router() {
           </ProtectedRoute>
         }
       />
-
     </Routes>
-  )
+  );
 }
 
-export default Router
+export default Router;

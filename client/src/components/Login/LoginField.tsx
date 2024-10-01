@@ -7,25 +7,22 @@ type LoginFieldProps = {
   labelName: string;
   changeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
   hasError: string;
-}
+};
 
-function LoginField({ 
-  value, 
-  type, 
-  labelClass, 
-  labelName, 
-  changeHandler, 
-  hasError
-  }: LoginFieldProps) {
+function LoginField({
+  value,
+  type,
+  labelClass,
+  labelName,
+  changeHandler,
+  hasError,
+}: LoginFieldProps) {
   return (
     <div className={`${labelClass}-field ${hasError ? "login-error" : ""}`}>
       <label>{labelName}:</label>
-      <input 
-        type={type}
-        value={value}
-        onChange={changeHandler} />
+      <input type={type} value={value} onChange={changeHandler} />
     </div>
-  )
+  );
 }
 
-export default LoginField
+export default LoginField;

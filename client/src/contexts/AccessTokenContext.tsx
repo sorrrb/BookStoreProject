@@ -35,8 +35,9 @@ export function AccessTokenProvider({ children }: AccessTokenProviderProps) {
         hasToken,
         login,
         logout,
-      }}>
-        {children}
+      }}
+    >
+      {children}
     </AccessTokenContext.Provider>
   );
 }
