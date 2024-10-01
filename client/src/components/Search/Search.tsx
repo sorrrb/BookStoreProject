@@ -29,7 +29,7 @@ function Search() {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <div className="book-search">
@@ -41,35 +41,37 @@ function Search() {
               width="32"
               height="32"
               src="https://img.icons8.com/ios-filled/32/search.png"
-              alt="search"/>
+              alt="search"
+            />
           </button>
           <input
             type="search"
             value={searchValue}
             onChange={fetchSearchResults}
+            spellCheck={"false"}
           />
         </div>
         <div className="search-output--container">
-          {searchResults && (
+          {searchResults &&
             searchResults.map((book: any, index: number) => {
               return (
                 <SearchCard
                   key={index}
                   title={book.title}
-                  thumbnailSrc={(book.imageLinks ?
-                    book.imageLinks.thumbnail :
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"
-                  )}
+                  thumbnailSrc={
+                    book.imageLinks
+                      ? book.imageLinks.thumbnail
+                      : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"
+                  }
                   authors={book.authors}
                   bookID={book.id}
                 />
-              )
-            })
-          )}
+              );
+            })}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Search
+export default Search;
