@@ -49,9 +49,19 @@ function Bookshelf() {
     return () => {
       ignore = true;
     };
-  }, [bookshelf]);
+  }, []);
 
-  const updateShelf = (obj: object) => setBookshelf(obj);
+  const updateShelf = (
+    bookshelfObj: object,
+    wantShelfObj: string[],
+    currentShelfObj: string[],
+    readShelfObj: string[]
+  ) => {
+    setBookshelf(bookshelfObj);
+    setShelfWant(wantShelfObj);
+    setShelfCurrent(currentShelfObj);
+    setShelfRead(readShelfObj);
+  };
 
   return (
     <div className="bookshelf">
@@ -59,7 +69,9 @@ function Bookshelf() {
       <div className="book-display">
         <div className="bookshelf--container">
           <div className="bookshelf-wrapper">
-            <h1>Want to Read</h1>
+            <h1>
+              Want to Read <span>({shelfWant.length})</span>
+            </h1>
             {bookshelf &&
               (shelfWant.length >= 1 ? (
                 shelfWant.map((book: any, index: number) => {
@@ -79,12 +91,14 @@ function Bookshelf() {
                   );
                 })
               ) : (
-                <p>No books in the shelf!</p>
+                <span className="empty">⚠️ Shelf Empty</span>
               ))}
           </div>
 
           <div className="bookshelf-wrapper">
-            <h1>Currently Reading</h1>
+            <h1>
+              Currently Reading <span>({shelfCurrent.length})</span>
+            </h1>
             {bookshelf &&
               (shelfCurrent.length >= 1 ? (
                 shelfCurrent.map((book: any, index: number) => {
@@ -104,12 +118,14 @@ function Bookshelf() {
                   );
                 })
               ) : (
-                <p>No books in the shelf!</p>
+                <span className="empty">⚠️ Shelf Empty</span>
               ))}
           </div>
 
           <div className="bookshelf-wrapper">
-            <h1>Read</h1>
+            <h1>
+              Read <span>({shelfRead.length})</span>
+            </h1>
             {bookshelf &&
               (shelfRead.length >= 1 ? (
                 shelfRead.map((book: any, index: number) => {
@@ -129,7 +145,7 @@ function Bookshelf() {
                   );
                 })
               ) : (
-                <p>No books in the shelf!</p>
+                <span className="empty">⚠️ Shelf Empty</span>
               ))}
           </div>
         </div>

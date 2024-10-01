@@ -8,7 +8,12 @@ type BookshelfCardProps = {
   thumbnailSrc: string;
   shelfStatus: string;
   bookID: string;
-  updateShelf: (obj: object) => void;
+  updateShelf: (
+    bookshelfObj: object,
+    wantShelfObj: string[],
+    currentShelfObj: string[],
+    readShelfObj: string[]
+  ) => void;
 };
 
 function BookshelfCard({
@@ -53,7 +58,12 @@ function BookshelfCard({
         );
         if (!ignore) {
           /* Handle AJAX response */
-          updateShelf(data.books);
+          updateShelf(
+            data.books,
+            data.books.wantToRead,
+            data.books.currentlyReading,
+            data.books.read
+          );
         }
       } catch (e) {
         console.error(e);
@@ -78,7 +88,12 @@ function BookshelfCard({
         });
         if (!ignore) {
           /* Handle AJAX response */
-          updateShelf(data.books);
+          updateShelf(
+            data.books,
+            data.books.wantToRead,
+            data.books.currentlyReading,
+            data.books.read
+          );
         }
       } catch (e) {
         console.error(e);
