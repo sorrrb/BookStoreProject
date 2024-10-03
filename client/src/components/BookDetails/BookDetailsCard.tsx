@@ -101,7 +101,7 @@ function BookDetailsCard({
               })}
             </div>
             <div className="book-card--links">
-              <a href={infoSrc}>
+              <a href={previewSrc}>
                 <img
                   width="25"
                   height="25"
@@ -109,7 +109,7 @@ function BookDetailsCard({
                   alt="google-logo"
                 />
               </a>
-              <a href={previewSrc}>
+              <a href={infoSrc}>
                 <img
                   width="25"
                   height="25"
